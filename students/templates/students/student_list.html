@@ -1,0 +1,43 @@
+{% extends 'students/base.html' %}
+{% block title %}Students{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        {% if students %}
+           <div class="container">
+               <div class="row">
+                   <table class="table table-hover table-responsive">
+                          <thead>
+                            <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Age</th>
+                            <th scope="col">Classroom</th>
+                            <th scope="col">Club</th>
+                            <th scope="col">House</th>
+                            <th scope="col">Photo</th>
+                            <th scope="col" style="text-align:center;">Actions</th>
+                            <th scope="col"style="margin: auto"></th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                          {% for student in students %}
+                            <tr>
+                            <td>{{ student.name }}</td>
+                            <td>{{ student.age }}</td>
+                            <td>{{ student.classroom }}</td>
+                            <td>{{ student.club }}</td>
+                            <td>{{ student.house }}</td>
+                            <td><img src="{{ student.photo.url }}" style="height: 40px; width: 40px;"></td>
+                            <td><a href="{% url 'students:update-student' student.id %}" class="btn btn-info btn-sm"><i class="fas fa-edit"></i> </a></td>
+                            <td><a href="{% url 'students:delete-student' student.id %}" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> </a></td>
+                            </tr>
+                          {% endfor %}
+                          </tbody>
+                        </table>
+                   </div>
+               </div>
+           </div>
+        {%endif%}
+    </div>
+</div>
+{% endblock %}
